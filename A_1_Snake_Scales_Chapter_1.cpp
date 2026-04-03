@@ -1,0 +1,173 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+const int N = 1e5 + 9;
+const int M = 1e9 + 7;
+
+ll Binexpitr(ll a, ll b, int m)
+{
+    ll ans = 1;
+    while (b)
+    {
+        if (b & 1)
+        {
+            ans = (ans * 1ll * a) % m;
+        }
+        a = (a * 1ll * a) % m;
+        b >>= 1;
+    }
+    return ans;
+}
+
+
+ll modinv(int n, int m)
+{
+    return Binexpitr(n, m - 2, m);
+}
+
+void main_()
+{
+    #ifndef ONLINE_JUDGE
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+    int t;
+    cin >> t;
+
+    for (int i = 0; i < t; i++)
+    {
+        cout << "Case #" << i + 1 << ": ";
+    }
+}
+
+static void run_with_stack_size(void (*func)(void), size_t stsize)
+{
+    char *stack, *send;
+    stack = (char *)malloc(stsize);
+    send = stack + stsize - 16;
+    send = (char *)((uintptr_t)send / 16 * 16);
+    asm volatile(
+        "mov %%esp, (%0)\n"
+        "mov %0, %%esp\n"
+        :
+        : "r"(send));
+    func();
+    asm volatile("mov (%0), %%esp\n"
+                 :
+                 : "r"(send));
+    free(stack);
+}
+
+int main()
+{
+    run_with_stack_size(main_, 1024 * 1024 * 1024);
+    return 0;
+}
+
+
+
+#include<bits/stdc++.h>
+#include<unordered_map>
+#include<unordered_set>
+#include<numeric>
+using namespace std;
+
+#define ll long long
+#define ld long double
+#define ull unsigned long long
+#define pb push_back
+#define eb emplace_back
+#define mp make_pair
+#define mt make_tuple
+#define f first
+#define s second
+
+#define all(v) (v).begin(), (v).end()
+#define rall(v) (v).rbegin(), (v).rend()
+#define cin(v) for(auto &x : v)cin >> x
+#define cin_2D(v) for(auto &row : v) for(auto &x : row)cin>>x
+#define cout(v) for(auto& x : v)cout << x << ' '
+#define cout_2D(v) for(auto& row : v) for(auto x : row) cout << x << ' '; cout << endl
+#define sz(v) (int)(v.size())
+#define vi vector<ll>
+#define vvi vector<vi>
+#define vec_max(v) *max_element(all(v))
+#define vec_min(v) *min_element(all(v))
+#define lb(v, x) distance((v).begin(), lower_bound(all(v), (x)))
+#define ub(v, x) distance((v).begin(), upper_bound(all(v), (x)))
+#define unique(v) sort(all(v)), v.erase(unique(all(v)), v.end()), v.shrink_to_fit()
+#define Y cout<<"YES"
+#define N cout<<"NO"
+
+#define for0(i, a) for (ll i = 0; i < (a); ++i)
+#define for1(i, a, b) for (ll i = a; i < (b); ++i)
+#define for2(i, a, b, c) for (ll i = a; i < (b); i += (c))
+#define for0_r(i, a) for (ll i = (a)-1; i >= (0); --i)
+#define for1_r(i, a, b) for (ll i = (b)-1; i >= (a); --i)
+#define for2_r(i, a, b, c) for (ll i = b; i < (a); i -= (c))
+
+string decToBinary(ll n) {
+    if (n == 0) return "0";
+    string binary = "";
+    while (n > 0) {
+        binary = char('0' + (n % 2)) + binary;
+        n /= 2;
+    }
+    return binary;
+}
+
+int max2D(const vector<vector<int>>& v) {
+    int mx = INT_MIN;
+    for (auto &row : v)
+        mx = max(mx, *max_element(all(row)));
+    return mx;
+}
+int min2D(const vector<vector<int>>& v) {
+    int mn = INT_MAX;
+    for (auto &row : v)
+        mn = min(mn, *min_element(all(row)));
+    return mn;
+}
+
+bool isPrime(int n) {
+    if (n < 2) return false;
+    if (n == 2) return true;
+    if (n % 2 == 0) return false;
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+string solve_case() {
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for (int &x : A) cin >> x;
+
+    int ans = 0;
+    for (int i = 0; i + 1 < N; ++i) {
+        ans = max(ans, abs(A[i + 1] - A[i]));
+    }
+
+    return to_string(ans);
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    // #ifndef ONLINE_JUDGE
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    // #endif
+
+    int t;
+    cin >> t;
+    for (int tc = 1; tc <= t; ++tc) {
+        cout << "Case #" << tc << ": " << solve_case() << endl;
+    }
+
+    return 0;
+}
